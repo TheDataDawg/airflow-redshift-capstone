@@ -68,11 +68,14 @@ services:
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary
+      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary python-dotenv
+      AWS_PROFILE: default
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ~/.aws:/home/airflow/.aws:ro
     ports:
       - 8000:8080
     healthcheck:
@@ -101,11 +104,14 @@ services:
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary
+      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary python-dotenv
+      AWS_PROFILE: default
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ~/.aws:/home/airflow/.aws:ro
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
       interval: 10s
@@ -133,11 +139,14 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
       DUMB_INIT_SETSID: "0"
-      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary
+      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary python-dotenv
+      AWS_PROFILE: default
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ~/.aws:/home/airflow/.aws:ro
     healthcheck:
       test:
         - "CMD-SHELL"
@@ -166,11 +175,14 @@ services:
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary
+      _PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres psycopg2-binary python-dotenv
+      AWS_PROFILE: default
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ~/.aws:/home/airflow/.aws:ro
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
       interval: 10s
